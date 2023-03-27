@@ -3,7 +3,6 @@ import { z } from "zod";
 // ENTITY
 export const Unit = z.object({
   type: z.string(),
-  strength: z.number()
 })
 
 export type Unit = z.infer<typeof Unit>;

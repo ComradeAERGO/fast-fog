@@ -1,9 +1,10 @@
 import { z } from "zod";
-import { Army, Unit } from "./army";
+import { Army } from "./army";
 import { PlayerID } from "./playerID";
 import { PlayerName } from "./playerName";
 import { PlayerColor } from "./playerColor";
 
+// AGGREGATE
 export const Player = z.object({
   id: PlayerID,
   name: PlayerName,
@@ -13,12 +14,12 @@ export const Player = z.object({
 
 export type Player = z.infer<typeof Player>;
 
-export function createPlayer(
+export const createPlayer = (
   id: string,
   name: string,
   color: string,
   initialArmyUnits: Army
-): Player {
+): Player => {
   const player = {
     id,
     name,
@@ -27,4 +28,4 @@ export function createPlayer(
   };
 
   return Player.parse(player);
-}
+};
