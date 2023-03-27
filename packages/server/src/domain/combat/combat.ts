@@ -1,5 +1,4 @@
 import { Unit } from "./unit";
-import { z } from "zod";
 
 export interface CombatResult {
   attackerLosses: number;
@@ -7,8 +6,8 @@ export interface CombatResult {
 }
 
 export function resolveCombat(attacker: Unit[], defender: Unit[]): CombatResult {
-  // Your combat resolution logic goes here.
-  // For example, you can implement a dice-based mechanism.
+  // Combat resolution logic goes here.
+  // For example, a dice-based mechanism.
 
   return {
     attackerLosses: 0, // Replace with actual losses calculated.

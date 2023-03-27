@@ -1,4 +1,3 @@
-// domain/gameboard/unit.ts
 import { z } from "zod";
 
 export const Unit = z.object({
