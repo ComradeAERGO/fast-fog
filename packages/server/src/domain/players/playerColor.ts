@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// VALUE OBJECT
 export const PlayerColor = z.string().refine(isValidColor, {
   message: "Invalid color value.",
 });

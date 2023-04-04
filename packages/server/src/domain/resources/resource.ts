@@ -6,13 +6,15 @@ import { ResourceType } from "./resourceType";
 export const Resource = z.object({
   id: ResourceID,
   type: ResourceType,
+  quantity: z.number(),
 })
 
 export type Resource = z.infer<typeof Resource>;
 
 export function createResource(
   id: string,
-  type: ResourceType
+  type: ResourceType,
+  quantity: number
 ): Resource {
-  return { id, type };
+  return { id, type, quantity };
 }

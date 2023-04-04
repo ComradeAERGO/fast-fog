@@ -5,15 +5,16 @@ import { z } from "zod";
 // AGGREGATE
 export const GameBoard = z.object({
   cells: z.array(z.array(Cell)),
+  players: z.array(z.string().uuid()),
 });
 
 export type GameBoard = z.infer<typeof GameBoard>;
 
-export function createGameBoard(size: number): GameBoard {
-  const cells = new Array(size)
+export function createGameBoard(size: {x: number, y: number}, players: string[]): GameBoard {
+  const cells = new Array(size.x)
     .fill(null)
-    .map(() => new Array(size).fill(null));
-  return { cells };
+    .map(() => new Array(size.y).fill(null));
+  return { cells, players };
 }
 
 export function setCell(gameBoard: GameBoard, cell: Cell): void {

@@ -1,16 +1,16 @@
 import { supabase } from "../../config/supabaseClient";
-import { IUnitRepository } from "../../domain/combat/unitRepository";
-import { Unit } from "../../domain/combat/unit";
+import { IArmyRepository } from "../../domain/combat/armyRepository";
+import { Army } from "../../domain/combat/army";
 
-export class UnitSupabaseAdapter implements IUnitRepository {
-  private table = "unit";
+export class ArmySupabaseAdapter implements IArmyRepository {
+  private table = "army";
 
-  async getById(id: string): Promise<Unit | null> {
+  async getById(id: string): Promise<Army | null> {
     const { data, error } = await supabase
       .from(this.table)
       .select()
       .eq("id", id)
-      .single<Unit>();
+      .single<Army>();
 
     if (error) {
       throw error;
@@ -19,11 +19,11 @@ export class UnitSupabaseAdapter implements IUnitRepository {
     return data;
   }
 
-  async create(unit: Unit): Promise<Unit> {
+  async create(unit: Army): Promise<Army> {
     const { data, error } = await supabase
       .from(this.table)
       .insert(unit)
-      .single<Unit>();
+      .single<Army>();
 
     if (error) {
       throw error;
@@ -32,7 +32,7 @@ export class UnitSupabaseAdapter implements IUnitRepository {
     return data!;
   }
 
-  async update(id: string, unit: Unit): Promise<void> {
+  async update(id: string, unit: Army): Promise<void> {
     const { data, error } = await supabase
       .from(this.table)
       .update(unit)

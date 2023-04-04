@@ -2,28 +2,37 @@ import { z } from "zod";
 import { PlayerID } from "./playerID";
 import { PlayerName } from "./playerName";
 import { PlayerColor } from "./playerColor";
+import { uuid } from "@supabase/supabase-js/dist/main/lib/helpers";
 
 // AGGREGATE
 export const Player = z.object({
   id: PlayerID,
   name: PlayerName,
+  createdAt: z.number(),
   color: PlayerColor,
-  army: PlayerArmy,
+  properties: z.array(z.string().uuid()),
+  armyId: z.string().uuid(),
+  resources: z.array(z.string().uuid()),
+  position: z.object({
+    x: z.number(),
+    y: z.number()
+  }),
 });
 
 export type Player = z.infer<typeof Player>;
 
 export const createPlayer = (
-  id: string,
   name: string,
-  color: string,
-  initialArmyUnits: PlayerArmy
+  color: PlayerColor,
+  armyId: string,
+  resources: any
 ): Player => {
   const player = {
-    id,
+    id: uuid(),
     name,
     color,
-    army: initialArmyUnits,
+    armyId,
+    resources,
   };
 
   return Player.parse(player);

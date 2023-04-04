@@ -1,26 +1,23 @@
 import { z } from "zod";
-import { Garrison } from "./garrison";
 import { PropertyID } from "./propertyID";
 import { PropertyName } from "./propertyName";
+import { PropertyColor } from "./propertyColor";
+import { uuid } from "@supabase/supabase-js/dist/main/lib/helpers";
 
 // AGGREGATE
 export const Property = z.object({
   id: PropertyID,
   name: PropertyName,
-  garrison: Garrison,
+  color: PropertyColor,
 });
 
 export type Property = z.infer<typeof Property>;
 
-export const createProperty = (
-  id: string,
-  name: string,
-  garrison: Garrison
-) => {
+export const createProperty = (name: PropertyName, color: PropertyColor) => {
   const property = {
-    id,
+    id: uuid(),
     name,
-    garrison,
+    color,
   };
 
   return Property.parse(property);

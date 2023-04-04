@@ -11,7 +11,7 @@ export const Army = z.object({
 export type Army = z.infer<typeof Army>
 
 export function createArmy(units: Unit[]): Army {
-  return { units, id: uuid() };
+  return { id: uuid(), units };
 }
 
 export function addUnit(army: Army, unit: Unit): void {

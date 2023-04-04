@@ -12,6 +12,7 @@ export type Cell = z.infer<typeof Cell>;
 export const PropertyCell = z.object({
   ...Cell.shape,
   propertyID: z.string(),
+  garrisonUnits: z.array(Unit),
 });
 export type PropertyCell = z.infer<typeof PropertyCell>;
 
@@ -20,5 +21,5 @@ export function createPropertyCell(
   propertyID: string,
   garrisonUnits: Unit[]
 ): PropertyCell {
-  return { coordinates, propertyID };
+  return { coordinates, propertyID, garrisonUnits };
 }
